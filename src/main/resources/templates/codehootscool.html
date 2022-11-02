@@ -312,31 +312,61 @@
 
         <div id="mc-question">
 
-            <span> What is the output of the following code? </span>
+            <span></span>
 
         </div>
 
         <div class="answer-wrapper"> 
 
             <div class="mc-answer" id="mc-0"> 
-                <span> Array[] Code code {   _     } Im coding very hard and very fast</span>
+                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-1"> 
-                <span> Array[] Code code { } </span>
+                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-2"> 
-                <span> Array[] Code code { } </span>
+                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-3"> 
-                <span> Array[] Code code { } </span>
+                <span></span>
             </div>
 
         </div>
 
     </div>
+
+    <script>
+
+        // Fetch data from https://codersbackend.tk/api/questions
+        function getData() {
+
+            // Fetch data from API
+            fetch('https://codersbackend.tk/api/questions/')
+            .then(response => response.json())
+            .then(data => {
+
+                let id = Math.floor(Math.random() * data.length);
+
+                // Set question
+                document.getElementById('mc-question').innerHTML = data[id].question;
+
+                // Set answers
+                for (let i = 0; i < 4; i++) {
+
+                    document.getElementById('mc-' + i).innerHTML = data[id][`ans${(i+1)}`];
+
+                }
+
+            });
+
+        }
+
+        getData();
+
+    </script>
     
 </th:block>
 </body>
