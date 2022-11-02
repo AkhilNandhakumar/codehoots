@@ -7,13 +7,67 @@
 </head>
 
 <body style="background-color: #5C3260">
-
-<div id="parent">
-    
-</div>
-
-
-</th:block>
+    <th:block layout:fragment="body" th:remove="tag">
+        <!-- Start of body content specific to page -->
+        <div>
+            <svg width=100% height=55%>
+                <rect x="0" y="0" width=100% height=55%
+                style="fill:ghostwhite;stroke:#5C3260;stroke-width:5;opacity:0.8" />
+            </svg>
+            <h1 style="margin-top: -8%; text-align: center">
+                Codehoot Title
+            </h1>
+        </div>
+        <div>
+            <svg width=100% height=625>
+                <rect x="15%" width=100% height=410%
+                style="fill:#714575;stroke:#5C3260;stroke-width:5" />
+            </svg>
+            <h2 style="margin-top: -30%; margin-left: 23%; color: ghostwhite">
+                Question Content
+            </h2>
+        </div>
+        <div>
+            <table style="margin-top: -10.75%; margin-left: 50%; width: 45%;">
+                <tr>
+                    <td>
+                      <svg width=300 height=300>
+                          <rect x="20" y="20" rx="20" ry="20" width=75% height=70%
+                          style="fill:#D4261B;stroke:#FF3F33;stroke-width:15" />
+                      </svg>
+                    </td>
+                    <td>
+                      <svg width=300 height=300>
+                          <rect x="20" y="20" rx="20" ry="20" width=75% height=70%
+                          style="fill:#169B00;stroke:#1FDA01;stroke-width:15" />
+                      </svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <svg width=300 height=300>
+                          <rect x="20" y="20" rx="20" ry="20" width=75% height=70%
+                          style="fill:#0070D7;stroke:#339DFF;stroke-width:15" />
+                      </svg>
+                    </td>
+                    <td>
+                      <svg width=300 height=300>
+                          <rect x="20" y="20" rx="20" ry="20" width=75% height=70%
+                          style="fill:#67239D;stroke:#9C34EE;stroke-width:15" />
+                      </svg>
+                    </td>
+                  </tr>
+              </table>
+            
+        </div>
+        <!-- End of body content specific to page -->
+    </th:block>
 </body>
+    
+<th:block layout:fragment="script" th:remove="tag">
+    <!-- Start of custom script specific to page -->
+    <script></script>
+    <!-- End of custom script specific to page -->
+</th:block>
 
 </html>
