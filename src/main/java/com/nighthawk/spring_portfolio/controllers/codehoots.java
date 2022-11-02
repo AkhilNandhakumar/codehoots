@@ -11,7 +11,7 @@ public class codehoots {
     public String codehoots() {
 
         // load HTML VIEW (birds.html)
-        return "codehoots";
+        return "codehootscool";
 
     }
 }
