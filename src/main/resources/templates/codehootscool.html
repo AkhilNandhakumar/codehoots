@@ -186,8 +186,7 @@
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             text-shadow: 0 1px 0 #FF3F33, 0 2px 0 #FF3F33,
                      0 20px 30px rgba(0, 0, 0, 0.5);
-            animation: timershake 1s;
-            animation-iteration-count: infinite;
+            animation: none;
 
         }
 
@@ -245,7 +244,7 @@
         }
 
         @keyframes timershake {
-
+            
             0% { transform: scale(1); }
             5% { transform: scale(1.05); }
             10% { transform: scale(1.1); }
@@ -340,6 +339,12 @@
 
     <script>
 
+        let data = [{
+
+            
+
+        }]
+
         // Fetch data from https://codersbackend.tk/api/questions
         function getData() {
 
@@ -347,6 +352,10 @@
             fetch('https://codersbackend.tk/api/questions/')
             .then(response => response.json())
             .then(data => {
+
+                console.log(data)
+
+                let qsi = [1, 2, 3, 4];
 
                 let id = Math.floor(Math.random() * data.length);
 
@@ -356,7 +365,11 @@
                 // Set answers
                 for (let i = 0; i < 4; i++) {
 
-                    document.getElementById('mc-' + i).innerHTML = data[id][`ans${(i+1)}`];
+                    let cd = Math.floor(Math.random() * qs.length);
+
+                    document.getElementById('mc-' + i).innerHTML = data[id][`ans${qsi[cd]}`];
+
+                    qsi.splice(cd, 1);
 
                 }
 
@@ -365,6 +378,16 @@
         }
 
         getData();
+
+        let start = Date.now();
+
+        document.getElementById("mc-hud-timer").style.animation = "timershake 1s infinite"
+
+        setInterval(()=>{
+
+            document.getElementById("mc-hud-timer").innerHTML = Math.floor((start - Date.now())/1000 + 60)
+
+        }, 10);
 
     </script>
     
