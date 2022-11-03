@@ -636,7 +636,7 @@
         let questionData = undefined;
         let correctAnswer = undefined;
         let questionPoints = undefined;
-        let time = 0;
+        let time = 999;
         let streak = 0;
         let totalPoints = 0;
         let paused = false;
@@ -739,25 +739,38 @@
 
                 document.getElementById("winpoints").innerHTML = "+" + questionPoints * streak + " points";
                 document.getElementById("winstreak").innerHTML = "You're on a " + streak + " win streak!";
+                setTimeout(() => {
+                updateCurrentQuestion();
+                start += 1500;
+            }, 2500);
 
             } else {
 
-                streak = 0;
-                document.getElementById("lose").classList.add("animateScreen");
-                document.getElementById("lose-text").classList.add("animateText");
-                setTimeout(() => {
-                    document.getElementById("lose").classList.remove("animateScreen");
-                    document.getElementById("lose-text").classList.remove("animateText");
-                    paused = false;
-                }, 5000);
+                wrong();
 
             }
 
-            setTimeout(() => {
-                updateCurrentQuestion();
-                start += 5
-            }, 2500);
+        }
 
+        function wrong() {
+
+            if (paused) return;
+            paused = true;
+
+            streak = 0;
+            document.getElementById("lose").classList.add("animateScreen");
+            document.getElementById("lose-text").classList.add("animateText");
+
+            setTimeout(() => {
+                document.getElementById("lose").classList.remove("animateScreen");
+                document.getElementById("lose-text").classList.remove("animateText");
+                paused = false;
+            }, 5000);
+
+            setTimeout(() => {
+            updateCurrentQuestion();
+            start += 1500;
+            }, 2500);
         }
 
         let start = Date.now();
@@ -767,6 +780,12 @@
         setInterval(()=>{
 
             document.getElementById("mc-hud-timer").innerHTML = Math.floor((start - Date.now())/1000 + time)
+
+            if (Math.floor((start - Date.now())/1000 + time < 0.02)) {
+
+                wrong();
+
+            }
 
         }, 10);
 
