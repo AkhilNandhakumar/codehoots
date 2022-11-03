@@ -135,6 +135,7 @@
 
             position: relative;
             display: flex;
+            flex-direction: column;
             background-color: #714575;
             grid-row: 2/2;
             grid-column: 2/4;
@@ -147,7 +148,7 @@
             align-self: center;
             text-align: left;
             color: white;
-            font-size: 2vw;
+            font-size: 1vw;
             height: calc(100% - 2rem);
             width: calc(100% - 1rem);
             text-shadow: 0 1px 0 #5C3260, 0 2px 0 #5C3260,
@@ -226,6 +227,12 @@
         #mc-hud-skip:hover {
 
             transform: scale(1.1);
+
+        }
+
+        .code {
+
+            white-space: pre;
 
         }
 
@@ -311,26 +318,20 @@
 
         <div id="mc-question">
 
-            <span></span>
-
         </div>
 
         <div class="answer-wrapper"> 
 
             <div class="mc-answer" id="mc-0"> 
-                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-1"> 
-                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-2"> 
-                <span></span>
             </div>
 
             <div class="mc-answer" id="mc-3"> 
-                <span></span>
             </div>
 
         </div>
@@ -339,45 +340,102 @@
 
     <script>
 
-        let data = [{
+        let sudodata = [
+            {
 
+                id: 1,
+                content1: "Consider the following code:",
+                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(i);\n}",
+                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
+                code2: "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}",
+                content3: "Make sure to include the semicolon at the end of the line.",
+                hint: "Think about how the for loop works and what the condition is.",
+                answer1: "The last number output to the console will be 5.",
+                answer2: "The last number output to the console will be 4.",
+                answer3: "The last number output to the console will be 6.",
+                answer4: "The last number output to the console will be 7.",
+                points: 100,
+                time: 75
+
+            },
+            {
+
+                id: 1,
+                content1: "You seem to enjoy coding, so consider the following code:",
+                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(-i);\n}",
+                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
+                code2: "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(-i);\n}",
+                content3: "Make sure to include the semicolon at the end of the line.",
+                hint: "Think about how the for loop works and what the condition is.",
+                answer1: "The last number output to the console will be -5.",
+                answer2: "The last number output to the console will be -4.",
+                answer3: "The last number output to the console will be -6.",
+                answer4: "The last number output to the console will be -7.",
+                points: 10000,
+                time: 999
+
+            }
+        ]
+
+        let questionData = undefined;
+        let correctAnswer = undefined;
+        let questionPoints = undefined;
+        let time = 0;
+        let totalPoints = 0;
+
+        function updateCurrentQuestion() {
+
+            let randomIndex = Math.floor(Math.random() * questionData.length);
+            questionData = questionData[randomIndex];
             
+            document.getElementById("mc-question").innerHTML =
+                "<span class='questionText'>" + questionData.content1 + "</span>" + "<br>" +
+                "<pre class='code'>" + questionData.code1.replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;") + "</pre>" + "<br>" +
+                "<span class='questionText'>" + questionData.content2 + "</span>" +"<br>" +
+                "<pre class='code'>" + questionData.code2.replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;") + "</pre>" + "<br>" +
+                "<span class='questionText'>" + questionData.content3; + "</span>"
 
-        }]
+            let answersBuffer = [questionData.answer1, questionData.answer2, questionData.answer3, questionData.answer4];
+
+            for (let i = 0; i < 4; i++) {
+
+                let randomAnswerIndex = Math.floor(Math.random() * answersBuffer.length);
+
+                document.getElementById("mc-" + i).innerHTML = answersBuffer[randomAnswerIndex];
+
+                if (answersBuffer[randomAnswerIndex] == questionData.answer1) {
+
+                    correctAnswer = i;
+
+                }
+
+                answersBuffer.splice(randomAnswerIndex, 1);
+
+            }
+
+            time = parseInt(questionData.time);
+            //document.getElementById("mc-hud-score").innerHTML = "<span>Points:</span>" + "<span>" + questionData.points + "</span>";
+            questionPoints = parseInt(questionData.points);
+
+        }
 
         // Fetch data from https://codersbackend.tk/api/questions
-        function getData() {
+        function setQuestionData() {
 
             // Fetch data from API
             fetch('https://codersbackend.tk/api/questions/')
             .then(response => response.json())
             .then(data => {
 
-                console.log(data)
+                questionData = sudodata//data
 
-                let qsi = [1, 2, 3, 4];
-
-                let id = Math.floor(Math.random() * data.length);
-
-                // Set question
-                document.getElementById('mc-question').innerHTML = data[id].question;
-
-                // Set answers
-                for (let i = 0; i < 4; i++) {
-
-                    let cd = Math.floor(Math.random() * qs.length);
-
-                    document.getElementById('mc-' + i).innerHTML = data[id][`ans${qsi[cd]}`];
-
-                    qsi.splice(cd, 1);
-
-                }
+                updateCurrentQuestion();
 
             });
 
         }
 
-        getData();
+        setQuestionData();
 
         let start = Date.now();
 
@@ -385,7 +443,7 @@
 
         setInterval(()=>{
 
-            document.getElementById("mc-hud-timer").innerHTML = Math.floor((start - Date.now())/1000 + 60)
+            document.getElementById("mc-hud-timer").innerHTML = Math.floor((start - Date.now())/1000 + time)
 
         }, 10);
 
