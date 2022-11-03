@@ -141,17 +141,15 @@
             grid-column: 2/4;
             border-radius: 0.4rem;
             margin: 1rem 1rem 1rem 0.25rem;
-            padding: 0.5rem 0.25rem 0.25rem 0.25rem;
-            vertical-align: center;
-            justify-content: center;
+            padding: 1rem 1rem 0.25rem 1rem;
             justify-self: center;
             align-self: center;
             text-align: left;
             color: white;
-            font-size: 1vw;
-            height: calc(100% - 2rem);
-            width: calc(100% - 1rem);
-            text-shadow: 0 1px 0 #5C3260, 0 2px 0 #5C3260,
+            font-size: 1.25vw;
+            height: calc(100% - 2.5rem);
+            width: calc(100% - 2rem);
+            text-shadow: 0 1px 0 #5C3260,
                      0 20px 30px rgba(0, 0, 0, 0.5);
 
         }
@@ -233,6 +231,14 @@
         .code {
 
             white-space: pre;
+            font-size: 1vw;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: #5C3260;
+            color: white;
+            font-weight: bold;
+            border: white 0.1rem solid;
+            padding: 0.25rem;
+            text-shadow: none;
 
         }
 
@@ -360,7 +366,7 @@
             },
             {
 
-                id: 1,
+                id: 2,
                 content1: "You seem to enjoy coding, so consider the following code:",
                 code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(-i);\n}",
                 content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
@@ -373,6 +379,23 @@
                 answer4: "The last number output to the console will be -7.",
                 points: 10000,
                 time: 999
+
+            },
+            {
+
+                id: 3,
+                content1: "",
+                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(-i);\n}",
+                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
+                code2: "",
+                content3: "",
+                hint: "Think about how the for loop works and what the condition is.",
+                answer1: "The last number output to the console will be -5.",
+                answer2: "The last number output to the console will be -4.",
+                answer3: "The last number output to the console will be -6.",
+                answer4: "The last number output to the console will be -7.",
+                points: 10000,
+                time: 123
 
             }
         ]
@@ -389,10 +412,10 @@
             questionData = questionData[randomIndex];
             
             document.getElementById("mc-question").innerHTML =
-                "<span class='questionText'>" + questionData.content1 + "</span>" + "<br>" +
-                "<pre class='code'>" + questionData.code1.replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;") + "</pre>" + "<br>" +
-                "<span class='questionText'>" + questionData.content2 + "</span>" +"<br>" +
-                "<pre class='code'>" + questionData.code2.replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;") + "</pre>" + "<br>" +
+                "<span class='questionText'>" + questionData.content1 + "</span>" +
+                "<pre class='code'>" + questionData.code1.replace(/\\n|\n/g, "<br>").replace(/\\t|\t/g, "&nbsp;&nbsp;") + "</pre>" +
+                "<span class='questionText'>" + questionData.content2 + "</span>" +
+                "<pre class='code'>" + questionData.code2.replace(/\\n|\n/g, "<br>").replace(/\\t|\t/g, "&nbsp;&nbsp;") + "</pre>" +
                 "<span class='questionText'>" + questionData.content3; + "</span>"
 
             let answersBuffer = [questionData.answer1, questionData.answer2, questionData.answer3, questionData.answer4];
