@@ -346,58 +346,87 @@
 
     <script>
 
-        let sudodata = [
+let sudodata = [
             {
-
                 id: 1,
-                content1: "Consider the following code:",
-                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(i);\n}",
-                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
-                code2: "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}",
-                content3: "Make sure to include the semicolon at the end of the line.",
-                hint: "Think about how the for loop works and what the condition is.",
-                answer1: "The last number output to the console will be 5.",
-                answer2: "The last number output to the console will be 4.",
-                answer3: "The last number output to the console will be 6.",
-                answer4: "The last number output to the console will be 7.",
-                points: 100,
-                time: 75
-
-            },
-            {
-
-                id: 2,
-                content1: "You seem to enjoy coding, so consider the following code:",
-                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(-i);\n}",
-                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
-                code2: "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(-i);\n}",
-                content3: "Make sure to include the semicolon at the end of the line.",
-                hint: "Think about how the for loop works and what the condition is.",
-                answer1: "The last number output to the console will be -5.",
-                answer2: "The last number output to the console will be -4.",
-                answer3: "The last number output to the console will be -6.",
-                answer4: "The last number output to the console will be -7.",
-                points: 10000,
-                time: 999
-
-            },
-            {
-
-                id: 3,
-                content1: "",
-                code1: "for (int i = 0; i < 10; i++) {\n\tSystem.out.println(-i);\n}",
-                content2: "The last number output to the console will be 10.\nIf you change the 10 to 5, what will happen?",
+                content1: "What does the following segment of Java code print out?",
+                code1: "double x = 4.5;\nint y = (int)x;\nSystem.out.println(x+' '+y);",
+                content2: "",
                 code2: "",
                 content3: "",
-                hint: "Think about how the for loop works and what the condition is.",
-                answer1: "The last number output to the console will be -5.",
-                answer2: "The last number output to the console will be -4.",
-                answer3: "The last number output to the console will be -6.",
-                answer4: "The last number output to the console will be -7.",
-                points: 10000,
-                time: 123
+                hint: "When you cast a double to an int, it truncates the result.",
+                answer1: "4.5 4",
+                answer2: "4 4,5",
+                answer3: "5 4.5",
+                answer4: "4.5 5",
+                points: 100,
+                time: 75
+            },
 
-            }
+            {
+                id: 2,
+                content1: "What does the following segment of Java code print out?",
+                code1: "int x = 7, y = 3;\nint z = x/y + x%y;\nif (z == x)\n\ty++;\nif (z == y)\n\tx++;\nSystem.out.println(x+' '+y+' '+z);",
+                content2: "",
+                code2: "",
+                content3: "",
+                hint: "Since 7/3 = 2 and 7%3 = 1, initially we set z to 3. At this point z and x aren't equal, so the first if gets skipped. Then we evaluate the second if where z and y are equal and x gets incremented to 8 (from 7). ",
+                answer1: "8 3 3",
+                answer2: "5 6 8",
+                answer3: "8 5 6",
+                answer4: "3 8 3",
+                points: 100,
+                time: 75
+            },
+
+            {
+                id: 3,
+                content1: "What does the following segment of Java code print out?",
+                code1: "for (int i=1; i<30; i = i + 3)\n{\n\tif (i%2 == 0)\n\t\tSystem.out.print((i/2)+' ');\n}\nSystem.out.println();",
+                content2: "",
+                code2: "",
+                content3: "",
+                hint: "As we go through the loop, i takes on the values 1, 4, 7, 10, 13, 16, 19, 22, 25 and 28. Of these, the even values (those that pass the if statement test) are 4, 10, 16, 22 and 28. If we divide each of these by 2, we get the output",
+                answer1: "2 5 8 11 14",
+                answer2: "14 11 8 5 2",
+                answer3: "4 10 16 22 28",
+                answer4: "2 8 5 11 14",
+                points: 100,
+                time: 75
+            },
+
+            {
+                id: 4,
+                content1: "Which of the following Boolean expressions are equivalent? (Assume that x and y are integer variables that have been initialized with the intended values.)",
+                code1: "i) ((x > 0) && (y > 0)) || ((x > 0) && (y < 0))\n\nii) x != y\n\niii) (x > 0) && (y != 0)\n\niv) (x > 0) && (x + y != x)",
+                content2: "",
+                code2: "",
+                content3: "",
+                hint: "notice that x + y != x is equivalent to y != 0, which we can show by subtracting x from both sides of the check",
+                answer1: "i, iii, iv",
+                answer2: "i and ii",
+                answer3: "i and iii",
+                answer4: "ii, iii, iv",
+                points: 100,
+                time: 75
+            },
+
+            {
+                id: 5,
+                content1: "The Boolean expression below is equivalent to which of the following?",
+                code1: "!(A || B)",
+                content2: "",
+                code2: "",
+                content3: "",
+                hint: "plug in all 4 and check (think of DeMorgan's Law)",
+                answer1: "!A && !B",
+                answer2: "!A || !B",
+                answer3: "!A || B",
+                answer4: "!A && B",
+                points: 100,
+                time: 75
+            },
+
         ]
 
         let questionData = undefined;
