@@ -718,8 +718,9 @@
         function checkAnswer(answer) {
 
             if (paused) return;
-            paused = true;
             if (answer == correctAnswer) {
+
+                paused = true;
 
                 streak++;
                 totalPoints += questionPoints * streak;
@@ -786,6 +787,8 @@
                 wrong();
 
             }
+
+            console.log(paused)
 
         }, 10);
 
