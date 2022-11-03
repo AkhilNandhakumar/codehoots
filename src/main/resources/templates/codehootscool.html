@@ -117,6 +117,7 @@
         #codehoot-title {
 
             display: flex;
+            z-index: 2;
             background-color: white;
             grid-row: 1/1;
             grid-column: 1/7;
@@ -231,7 +232,7 @@
         .code {
 
             white-space: pre;
-            font-size: 1vw;
+            font-size: 0.9vw;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             background-color: #5C3260;
             color: white;
@@ -239,6 +240,181 @@
             border: white 0.1rem solid;
             padding: 0.25rem;
             text-shadow: none;
+
+        }
+
+        .hint {
+
+            margin-top: auto;
+            margin-bottom: 0.25rem;
+            font-size: 1.1vw;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: white;
+            color: black;
+            border: #5C3260 0.2rem solid;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            text-shadow: none;
+            text-align: left;
+            
+        }
+
+        .hint::before {
+
+            position: relative;
+            content: "Hint:";
+            bottom: 0.6rem;
+            left: -0.9rem;
+            background-clip: padding-box; /* prevents the background from extending past the border */
+            background-color: white;
+            color: black;
+            border: #5C3260 0.2rem solid;
+            border-radius: 0.25rem;
+            padding: 0.1rem 0.2rem;
+
+        }
+
+        .screen {
+
+            z-index: 1;
+            position: absolute;
+            flex-direction: column;
+            background-color: blue;
+            display: flex;
+            width: 200vw;
+            height: 200vw;
+            bottom: 100%;
+            left: -100vw;
+            text-align: center;
+            justify-content: center;
+            vertical-align: center;
+            transform-origin: bottom right;
+
+        }
+
+        #win {
+
+            background-color: lime;
+            border: green 0.4rem solid;
+
+        }
+
+        #lose {
+
+            background-color: red;
+            border: darkred 0.4rem solid;
+   
+        }
+
+        #win-text {
+
+            position: absolute;
+            left: -100%;
+            top: 50%;
+            bottom: 50%;
+            z-index: 2;
+            position: absolute;
+            flex-direction: column;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            vertical-align: center;
+            width: 40vw;
+
+        }
+
+        #lose-text {
+
+            position: absolute;
+            left: -100%;
+            top: 50%;
+            bottom: 50%;
+            z-index: 2;
+            position: absolute;
+            flex-direction: column;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            vertical-align: center;
+            width: 40vw;
+
+        }
+
+        .animateText {
+
+            animation: animateText 5s ease-in-out infinite;
+
+        }
+
+        .animateScreen {
+
+            animation: answerEffect 5s ease-in-out;
+
+        }
+
+        @keyframes answerEffect {
+
+            0% {
+
+                transform: rotate(0deg);
+
+            }
+
+            25% {
+
+                transform: rotate(-90deg);
+
+            }
+
+            75% {
+
+                transform: rotate(-90deg);
+
+            }
+
+            100% {
+
+                transform: rotate(-180deg);
+
+            }
+
+        }
+
+        @keyframes animateText {
+
+            0% {
+
+                left: -50%;
+                bottom: 50%;
+            }
+
+            25% {
+
+                left: calc(50% - 20vw);
+                bottom: 50%;
+
+            }
+
+            55% {
+
+                left: calc(50% - 20vw);
+                bottom: 50%;
+
+            }
+
+            85% {
+
+                bottom: -100%;
+                left: calc(50% - 20vw);
+
+            }
+
+            100% {
+
+                bottom: -100%;
+                left: calc(50% - 20vw);
+
+            }
 
         }
 
@@ -297,7 +473,7 @@
 
         <div id="codehoot-title">
 
-            <span> Arrays and Lists by John Mortensen </span>
+            <span> CODEHOOTS MCQ DEMO by Team Coders </span>
 
         </div>
 
@@ -305,18 +481,18 @@
 
             <div id="mc-hud-timer">
 
-                <span> 59 </span>
+                <span> 0 </span>
 
             </div>
 
             <div id="mc-hud-score">
 
                 <span>Points:</span>
-                <span>1.32k</span>
+                <span>0</span>
 
             </div>
 
-            <div id="mc-hud-skip">
+            <div id="mc-hud-skip" onclick='skip()'>
                 <span> Skip </span>
             </div>
 
@@ -328,25 +504,40 @@
 
         <div class="answer-wrapper"> 
 
-            <div class="mc-answer" id="mc-0"> 
+            <div class="mc-answer" id="mc-0" onclick='checkAnswer(0)'> 
             </div>
 
-            <div class="mc-answer" id="mc-1"> 
+            <div class="mc-answer" id="mc-1" onclick='checkAnswer(1)'> 
             </div>
 
-            <div class="mc-answer" id="mc-2"> 
+            <div class="mc-answer" id="mc-2" onclick='checkAnswer(2)'> 
             </div>
 
-            <div class="mc-answer" id="mc-3"> 
+            <div class="mc-answer" id="mc-3" onclick='checkAnswer(3)'> 
             </div>
 
+        </div>
+
+        <div class="screen" id='win'> 
+        </div>
+        <div id="win-text">
+            <span> Nice job! </span>
+            <span id="winpoints"> +100 Points </span>
+            <span id="winstreak"> You have a 3 win streak </span>
+        </div>
+        <div class="screen" id='lose'> 
+        </div>
+        <div id="lose-text">
+            <span> You'll get 'em next time! </span>
+            <span> +0 Points </span>
+            <span> Your streak has reset </span>
         </div>
 
     </div>
 
     <script>
 
-let sudodata = [
+        let sudodata = [
             {
                 id: 1,
                 content1: "What does the following segment of Java code print out?",
@@ -410,7 +601,6 @@ let sudodata = [
                 points: 100,
                 time: 75
             },
-
             {
                 id: 5,
                 content1: "The Boolean expression below is equivalent to which of the following?",
@@ -426,36 +616,66 @@ let sudodata = [
                 points: 100,
                 time: 75
             },
-
+            {
+                id: 6,
+                content1: "What does the following segment of Java code print out?",
+                code1: "int x = 1, y = 2, z = 3;\nif (x < y)\n\tif (y < z)\n\t\tSystem.out.println(\"A\");\n\telse\n\t\tSystem.out.println(\"B\");\nelse\n\tSystem.out.println(\"C\");",
+                content2: "",
+                code2: "",
+                content3: "",
+                hint: "The first if statement is true, so we evaluate the second if statement. Since y < z is true, we print out A.",
+                answer1: "A",
+                answer2: "B",
+                answer3: "C",
+                answer4: "A and C",
+                points: 100,
+                time: 75
+            },
         ]
 
         let questionData = undefined;
         let correctAnswer = undefined;
         let questionPoints = undefined;
         let time = 0;
+        let streak = 0;
         let totalPoints = 0;
+        let paused = false;
 
+        let regex = (string) => {
+            return string.replace(/\\n|\n/g, "<br>").replace(/\\t|\t/g, "&nbsp;&nbsp;");
+        }
+        
         function updateCurrentQuestion() {
 
+            start = Date.now()
+
             let randomIndex = Math.floor(Math.random() * questionData.length);
-            questionData = questionData[randomIndex];
+            let question = questionData[randomIndex];
             
             document.getElementById("mc-question").innerHTML =
-                "<span class='questionText'>" + questionData.content1 + "</span>" +
-                "<pre class='code'>" + questionData.code1.replace(/\\n|\n/g, "<br>").replace(/\\t|\t/g, "&nbsp;&nbsp;") + "</pre>" +
-                "<span class='questionText'>" + questionData.content2 + "</span>" +
-                "<pre class='code'>" + questionData.code2.replace(/\\n|\n/g, "<br>").replace(/\\t|\t/g, "&nbsp;&nbsp;") + "</pre>" +
-                "<span class='questionText'>" + questionData.content3; + "</span>"
+                "<span class='questionText'>" +  regex(question.content1) + "</span>" +
+                "<pre class='code'>" + regex(question.code1) + "</pre>" +
+                "<span class='questionText'>" + question.content2 + "</span>" +
+                "<pre class='code'>" +  regex(question.code2) + "</pre>" +
+                "<span class='questionText'>" +  regex(question.content3) + "</span>" +
+                "<span class='hint'>" +  regex(question.hint) + "</span>";
 
-            let answersBuffer = [questionData.answer1, questionData.answer2, questionData.answer3, questionData.answer4];
+            if (document.getElementById("mc-question").children[0].innerHTML.length <= 2) document.getElementById("mc-question").children[0].style.display = "none";
+            if (document.getElementById("mc-question").children[1].innerHTML.length <= 2) document.getElementById("mc-question").children[1].style.display = "none";
+            if (document.getElementById("mc-question").children[2].innerHTML.length <= 2) document.getElementById("mc-question").children[2].style.display = "none";
+            if (document.getElementById("mc-question").children[3].innerHTML.length <= 2) document.getElementById("mc-question").children[3].style.display = "none";
+            if (document.getElementById("mc-question").children[4].innerHTML.length <= 2) document.getElementById("mc-question").children[4].style.display = "none";
+            if (document.getElementById("mc-question").children[5].innerHTML.length <= 2) document.getElementById("mc-question").children[5].style.display = "none";
+       
+            let answersBuffer = [question.answer1, question.answer2, question.answer3, question.answer4];
 
             for (let i = 0; i < 4; i++) {
 
                 let randomAnswerIndex = Math.floor(Math.random() * answersBuffer.length);
 
-                document.getElementById("mc-" + i).innerHTML = answersBuffer[randomAnswerIndex];
+                document.getElementById("mc-" + i).innerHTML =  regex(answersBuffer[randomAnswerIndex]);
 
-                if (answersBuffer[randomAnswerIndex] == questionData.answer1) {
+                if (answersBuffer[randomAnswerIndex] == question.answer1) {
 
                     correctAnswer = i;
 
@@ -464,10 +684,9 @@ let sudodata = [
                 answersBuffer.splice(randomAnswerIndex, 1);
 
             }
-
-            time = parseInt(questionData.time);
+            time = parseInt(question.time);
             //document.getElementById("mc-hud-score").innerHTML = "<span>Points:</span>" + "<span>" + questionData.points + "</span>";
-            questionPoints = parseInt(questionData.points);
+            questionPoints = parseInt(question.points);
 
         }
 
@@ -478,8 +697,8 @@ let sudodata = [
             fetch('https://codersbackend.tk/api/questions/')
             .then(response => response.json())
             .then(data => {
-
-                questionData = sudodata//data
+      
+                questionData = data
 
                 updateCurrentQuestion();
 
@@ -487,7 +706,59 @@ let sudodata = [
 
         }
 
+        function skip() {
+
+            if (paused) return;
+            updateCurrentQuestion();
+
+        }
+
         setQuestionData();
+
+        function checkAnswer(answer) {
+
+            if (paused) return;
+            paused = true;
+            if (answer == correctAnswer) {
+
+                streak++;
+                totalPoints += questionPoints * streak;
+                totalPointsString = Intl.NumberFormat('en-US', {
+                    notation: "compact",
+                    maximumSignificantDigits: 4
+                }).format(totalPoints);
+                document.getElementById("mc-hud-score").innerHTML = "<span>Points:</span>" + "<span>" + totalPointsString + "</span>";
+
+                document.getElementById("win").classList.add("animateScreen");
+                document.getElementById("win-text").classList.add("animateText");
+                setTimeout(() => {
+                    document.getElementById("win").classList.remove("animateScreen");
+                    document.getElementById("win-text").classList.remove("animateText");
+                    paused = false;
+                }, 5000);
+
+                document.getElementById("winpoints").innerHTML = "+" + questionPoints * streak + " points";
+                document.getElementById("winstreak").innerHTML = "You're on a " + streak + " win streak!";
+
+            } else {
+
+                streak = 0;
+                document.getElementById("lose").classList.add("animateScreen");
+                document.getElementById("lose-text").classList.add("animateText");
+                setTimeout(() => {
+                    document.getElementById("lose").classList.remove("animateScreen");
+                    document.getElementById("lose-text").classList.remove("animateText");
+                    paused = false;
+                }, 5000);
+
+            }
+
+            setTimeout(() => {
+                updateCurrentQuestion();
+                start += 5
+            }, 2500);
+
+        }
 
         let start = Date.now();
 
